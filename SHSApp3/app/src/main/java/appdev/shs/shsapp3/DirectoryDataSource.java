@@ -21,7 +21,7 @@ import com.parse.ParseQuery;
 public class DirectoryDataSource {
 
 
-	
+	//It appears that this file isn't just for the directory.
 
 	private SQLiteDatabase database;
 	private DirectoryDBHelper dbHelper; 

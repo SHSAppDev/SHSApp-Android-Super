@@ -44,9 +44,9 @@ public class ContactActivity extends Activity {
 		
 		datasource = new DirectoryDataSource(this);
 		datasource.open();
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		if(getActionBar()!=null)getActionBar().setDisplayHomeAsUpEnabled(true);
 		toDisplay = (Contact)getIntent().getSerializableExtra("toDisplay");
-		getActionBar().setTitle(toDisplay.name);
+		if(getActionBar()!=null)getActionBar().setTitle(toDisplay.name);
 		TextView teachertitle=(TextView)findViewById(R.id.contact_name);
 		teachertitle.setText(toDisplay.name);
 		

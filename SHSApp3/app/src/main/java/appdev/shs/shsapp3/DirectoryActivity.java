@@ -15,6 +15,7 @@ public class DirectoryActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DirectoryDataSource datasource = new DirectoryDataSource(this);
+		datasource.loadDatabase(true);
 		datasource.open();
 		ArrayAdapter<String> subdirectories = new ArrayAdapter<String>(this, 
 				android.R.layout.simple_list_item_1, 
@@ -22,7 +23,7 @@ public class DirectoryActivity extends ListActivity {
 		);
 		
 		this.setListAdapter(subdirectories);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		if (getActionBar()!=null)getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 

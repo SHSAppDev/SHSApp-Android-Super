@@ -42,7 +42,7 @@ public class SubdirectoryActivity extends ListActivity {
 				android.R.layout.simple_list_item_1, list);	
 		this.setTitle(this.getString(R.string.title_activity_directory) + ": " + filter);
 		this.setListAdapter(contacts);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		if (getActionBar()!=null)getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
