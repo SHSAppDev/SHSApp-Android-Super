@@ -10,12 +10,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class DirectoryActivity extends ListActivity {
-	
+
+	static boolean databaseLoaded = false;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DirectoryDataSource datasource = new DirectoryDataSource(this);
-		datasource.loadDatabase(true);
+		if(!databaseLoaded){
+			datasource.loadDatabase(true);
+			databaseLoaded=true;
+		}
 		datasource.open();
 		ArrayAdapter<String> subdirectories = new ArrayAdapter<String>(this, 
 				android.R.layout.simple_list_item_1, 

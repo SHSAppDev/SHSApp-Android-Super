@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -104,8 +105,13 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+        Log.d("MainActivity","Nav drawer item selected at pos "+position);
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
+
+        if (position==0) fragmentManager.beginTransaction()
+                .replace(R.id.container, EmptyTestUI.newInstance(position + 1))
+                .commit();
+        else fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
     }
@@ -183,6 +189,8 @@ public class MainActivity extends ActionBarActivity
         }
 
         public PlaceholderFragment() {
+
+
         }
 
         @Override
@@ -195,6 +203,7 @@ public class MainActivity extends ActionBarActivity
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
+            Log.d("MainActivity","Placeholder fragment attatched.");
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
