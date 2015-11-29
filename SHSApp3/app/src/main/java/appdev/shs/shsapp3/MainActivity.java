@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -40,8 +41,6 @@ public class MainActivity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-    private GridView gridMenu;
-    private ArrayList<GridItem> gridItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,58 +55,51 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
-        gridMenu = (GridView)findViewById(R.id.grid_menu);
-
-        //Initialize the buttons (grid items)
-        gridItems = new ArrayList<GridItem>();
-
-        //gridItems.add(new GridItem("Schedule", getResources().getDrawable(R.drawable.schedule),
-        //        new Intent(this, ScheduleActivity.class)));
-
-        Intent aeries0 = new Intent(Intent.ACTION_VIEW, Uri.parse("https://aeries.lgsuhsd.org/aeries.net/loginparent.aspx"));
-        gridItems.add(new GridItem("Aeries", getResources().getDrawable(R.drawable.addphoto), aeries0));
-
-        Intent canvas = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("https://lgsuhsd.instructure.com/login"));
-        gridItems.add(new GridItem("Canvas", getResources().getDrawable(R.drawable.canvas),
-                canvas));
+        //restoreActionBar();
 
 
-        //gridItems.add(new GridItem("Falcon Newspaper", getResources().getDrawable(R.drawable.falconpaper),
-        //        new Intent(this, NewsActivity.class)));
-
-        gridItems.add(new GridItem("Directory", getResources().getDrawable(R.drawable.contacts),
-                new Intent(this, DirectoryActivity.class)));
-
-        Intent naviance = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("https://connection.naviance.com/family-connection/auth/login/?hsid=saratogahigh"));
-        gridItems.add(new GridItem("Naviance", getResources().getDrawable(R.drawable.naviance),
-                naviance));
-
-        //gridItems.add(new GridItem("Announcements", getResources().getDrawable(R.drawable.annoucement),
-        //  new Intent(this, Annoucements.class)));
-
-        //gridItems.add(new GridItem("Sports Center", getResources().getDrawable(R.drawable.sportscenter),
-        //        new Intent(this, SportsCenterActivity.class)));
-
-        gridMenu.setAdapter(new GridMenuAdapter());
-        gridMenu.setOnItemClickListener(this);
     }
 
     @Override
     public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-        GridItem item = gridItems.get(position);
-        startActivity(item.intent);
+
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+        Log.d("MainActivity","Nav drawer item selected at pos "+position);
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+
+        switch (position) {
+            case 0: //Bells
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, BellsFragment.newInstance(position+1))
+                        .commit();
+                break;
+            case 1: //Announcements
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, AnnouncementsFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 2: //Newspaper
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, NewspaperFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 3: //Directory
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, DirectoryFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 4: //Sports Center
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, SportsCenterFragment.newInstance(position + 1))
+                        .commit();
+                break;
+        }
+
+
     }
 
     public void onSectionAttached(int number) {
@@ -121,7 +113,15 @@ public class MainActivity extends ActionBarActivity
             case 3:
                 mTitle = getString(R.string.title_section3);
                 break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
+                break;
+            case 5:
+                mTitle = getString(R.string.title_section5);
+                break;
+
         }
+        restoreActionBar();
     }
 
     public void restoreActionBar() {
@@ -129,6 +129,7 @@ public class MainActivity extends ActionBarActivity
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+        Log.d("MainActivity", "title set to "+mTitle);
     }
 
 
@@ -160,88 +161,8 @@ public class MainActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
-    }
-
-    public class GridMenuAdapter extends BaseAdapter {
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View item = getLayoutInflater().inflate(R.layout.grid_item_layout, null);
-            item.setPadding(0, 50, 0, 40);
-            GridItem current = gridItems.get(position);
-            TextView label = (TextView)item.findViewById(R.id.item_label);
-            label.setText(current.text);
-            label.setCompoundDrawables(null, current.image, null, null);
-            label.setCompoundDrawablePadding(32);
-            item.setMinimumHeight(300);
-            return item;
-        }
-
-        @Override
-        public final int getCount() {
-            return gridItems.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return gridItems.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-    }
-
-    public static class GridItem {
-        public String text;
-        public Drawable image;
-        public Intent intent;
-        public GridItem(String text, Drawable image, Intent intent) {
-            this.text = text;
-            this.image = image;
-            this.image.setBounds(0, 0, 160, 160);
-            this.intent = intent;
-        }
-    }
+    
 
 
 }
