@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -171,6 +173,14 @@ public class NavigationDrawerFragment extends Fragment {
                 }
 
                 getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+
+                //close right drawer if opened
+                if (mDrawerLayout.isDrawerOpen(Gravity.LEFT) && mDrawerLayout.isDrawerOpen(Gravity.RIGHT)) {
+
+                    mDrawerLayout.closeDrawer(Gravity.RIGHT);
+                    Log.d("NavDrawerFrag","Right drawer closed.");
+                }
+
             }
         };
 
@@ -250,8 +260,10 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.action_grades) {
+            //open grade drawer
+            if(mDrawerLayout.isDrawerOpen(Gravity.RIGHT))mDrawerLayout.closeDrawer(Gravity.RIGHT);
+            else mDrawerLayout.openDrawer(Gravity.RIGHT);
             return true;
         }
 
