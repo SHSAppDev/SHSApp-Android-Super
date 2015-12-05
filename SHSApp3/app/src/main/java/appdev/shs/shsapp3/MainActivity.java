@@ -26,6 +26,8 @@ import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.parse.Parse;
+
 import java.util.ArrayList;
 
 
@@ -46,6 +48,8 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Parse.initialize(this, "mBeDrmdeuRATh3rO7CqbTZMYKcXkuSrCKPEkPFDG", "VoIiZFddiKtfH9i7iz5jyQMsT9H45KgnDUOtEDo2");
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
