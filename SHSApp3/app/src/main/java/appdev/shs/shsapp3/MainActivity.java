@@ -86,17 +86,22 @@ public class MainActivity extends ActionBarActivity
                         .replace(R.id.container, AnnouncementsFragment.newInstance(position + 1))
                         .commit();
                 break;
-            case 2: //Newspaper
+            case 2: //Calender
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, CalenderFragment.newInstance(position + 1))
+                        .commit();
+                break;
+            case 3: //Newspaper
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, NewspaperFragment.newInstance(position + 1))
                         .commit();
                 break;
-            case 3: //Directory
+            case 4: //Directory
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, DirectoryFragment.newInstance(position + 1))
                         .commit();
                 break;
-            case 4: //Sports Center
+            case 5: //Sports Center
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, SportsCenterFragment.newInstance(position + 1))
                         .commit();
@@ -115,12 +120,15 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.title_section2);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = "Calender";
                 break;
             case 4:
-                mTitle = getString(R.string.title_section4);
+                mTitle = getString(R.string.title_section3);
                 break;
             case 5:
+                mTitle = getString(R.string.title_section4);
+                break;
+            case 6:
                 mTitle = getString(R.string.title_section5);
                 break;
 
