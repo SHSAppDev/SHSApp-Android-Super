@@ -30,7 +30,7 @@
     </FrameLayout>
 
     <fragment android:id="@+id/grade_drawer"
-        android:layout_width="@dimen/navigation_drawer_width" android:layout_height="match_parent"
+        android:layout_width="match_parent" android:layout_height="match_parent"
         android:layout_gravity="end" android:name="appdev.shs.shsapp3.ViewGradesFragment"
         tools:layout="@layout/fragment_navigation_drawer" />
 

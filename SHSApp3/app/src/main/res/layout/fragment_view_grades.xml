@@ -2,26 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context="appdev.shs.shsapp3.ViewGradesFragmentBadOne">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/main_view"
-        android:background="@color/grey_background">
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height= "20dp"
-            android:src="@drawable/canvas"
-            android:layout_centerInParent="true"
-            android:id="@+id/canvasimgingradesfragment"/>
+        <WebView
+            android:id="@+id/grades_web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/canvasimgingradesfragment"
-            android:layout_centerHorizontal="true"
-            android:text="Your grades Shalt Appeareth here with code VOODOO! This text is all filler for the real thing."/>
 
-    </RelativeLayout>
+        </WebView>
+
+    </LinearLayout>
 
 </FrameLayout>
