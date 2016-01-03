@@ -10,25 +10,25 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CalenderFragment#newInstance} factory method to
+ * Use the {@link CalendarFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CalenderFragment extends Fragment {
+public class CalendarFragment extends Fragment {
 
     private static final String ARG_POS = "position";
 
     private int mPosition;
 
 
-    public static CalenderFragment newInstance(int pos) {
-        CalenderFragment fragment = new CalenderFragment();
+    public static CalendarFragment newInstance(int pos) {
+        CalendarFragment fragment = new CalendarFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_POS, pos);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public CalenderFragment() {
+    public CalendarFragment() {
         // Required empty public constructor
     }
 

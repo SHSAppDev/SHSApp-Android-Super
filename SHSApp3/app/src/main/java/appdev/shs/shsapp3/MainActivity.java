@@ -1,34 +1,17 @@
 package appdev.shs.shsapp3;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.GridLayout;
-import android.widget.GridView;
-import android.widget.TextView;
 
 import com.parse.Parse;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity
@@ -88,7 +71,7 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 2: //Calender
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, CalenderFragment.newInstance(position + 1))
+                        .replace(R.id.container, CalendarFragment.newInstance(position + 1))
                         .commit();
                 break;
             case 3: //Newspaper
